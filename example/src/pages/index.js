@@ -40,7 +40,7 @@ export default function Home() {
         />
       </Head>
       <div className='prose prose-invert max-w-none prose-headings:border-b prose-headings:border-gray-600 prose-h1:text-2xl'>
-        <ReactMarkdown children={markdown} />
+        <ReactMarkdown>{markdown}</ReactMarkdown>
       </div>
     </>
   );
