@@ -7,7 +7,7 @@ import { webcrypto } from 'crypto';
  * @param {string} lockedToken - The locked token.
  * @returns {object} An object containing the JWT, timestamped JWT, timestamp, signature, and public key.
  */
-function splitLockedToken(lockedToken) {
+export function splitLockedToken(lockedToken) {
   const substrings = lockedToken.split('.');
   const jwtElements = substrings.slice(0, 3);
   const jwtPayload = JSON.parse(atob(jwtElements[1]));
@@ -66,7 +66,11 @@ async function getItem(key) {
     };
 
     request.onerror = (event) => {
-      reject(new Error(`Error getting item with key "${key}" from the IndexedDB database.`));
+      reject(
+        new Error(
+          `Error getting item with key "${key}" from the IndexedDB database.`
+        )
+      );
     };
   });
 }
@@ -89,7 +93,11 @@ async function setItem(key, value) {
     };
 
     request.onerror = (event) => {
-      reject(new Error(`Error setting item with key "${key}" in the IndexedDB database.`));
+      reject(
+        new Error(
+          `Error setting item with key "${key}" in the IndexedDB database.`
+        )
+      );
     };
   });
 }
@@ -98,7 +106,7 @@ async function setItem(key, value) {
  * Clears the IndexedDB database.
  * @returns {Promise<void>} A promise that resolves when the database has been cleared.
  */
-async function clearIdb() {
+export async function clearIdb() {
   const db = await openDatabase();
   return new Promise((resolve, reject) => {
     const transaction = db.transaction(storeName, 'readwrite');
@@ -159,7 +167,7 @@ async function exportPublicKey(key) {
   Generates an ECDSA key pair and stores the private key in IndexedDB.
   @returns {Promise<string>} A promise that resolves with the base64-encoded public key.
   */
-async function generateKeyPair() {
+export async function generateKeyPair() {
   const keyPair = await window.crypto.subtle.generateKey(
     {
       name: 'ECDSA',
@@ -181,7 +189,7 @@ Locks a JWT with a timestamp and ECDSA signature. To be run on the client / brow
 @param {string} token - The JWT to lock.
 @returns {Promise<string>} A promise that resolves with the locked token.
 */
-async function lockToken(token) {
+export async function lockToken(token) {
   const clientTimestamp = Date.now();
   const timeStampedJwt = `${token}.${clientTimestamp}`;
 
@@ -236,14 +244,14 @@ Verifies a locked token's timestamp and signature. To be run on the server.
 @param {string} lockedToken - The locked token to verify.
 @returns {Promise<string>} A promise that resolves with a validation message: 'valid' | 'Invalid signature' | 'Token expired'
 */
-async function verifyLockedToken(lockedToken) {
+export async function verifyLockedToken(lockedToken, validityInterval = 3000) {
   try {
     const tokenElements = splitLockedToken(lockedToken);
     const timestampedJwt = tokenElements.timestampedJwt;
     const signature = base64ToArrayBuffer(tokenElements.signature);
     const publicKey = await importPublicKey(tokenElements.publicKey);
     const timestamp = tokenElements.timestamp;
-    const validInterval = Date.now() - timestamp <= 3000;
+    const validInterval = Date.now() - timestamp <= validityInterval;
     const ec = new TextEncoder();
     const validSignature = await webcrypto.subtle.verify(
       { name: 'ECDSA', hash: { name: 'SHA-256' } },
@@ -251,11 +259,13 @@ async function verifyLockedToken(lockedToken) {
       signature,
       ec.encode(timestampedJwt)
     );
-    const validation = !validInterval ? 'Token expired' : !validSignature ? 'Invalid signature' : 'valid';
+    const validation = !validInterval
+      ? 'Token expired'
+      : !validSignature
+      ? 'Invalid signature'
+      : 'valid';
     return validation;
   } catch (error) {
     throw new Error('Error verifying locked token: ' + error.message);
   }
 }
-
-module.exports = { splitLockedToken, clearIdb, generateKeyPair, lockToken, verifyLockedToken };

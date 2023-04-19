@@ -1,14 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 import Router from 'next/router';
+import Head from 'next/head';
 import { UserContext } from '@/pages/_app';
 import { lockToken, clearIdb } from 'session-lock';
-import SignalBoxes from '@/components/SignalBoxes';
 import CopyTokenButton from '@/components/CopyTokenButton';
 
 export default function Dashboard() {
   const [message, setMessage] = useState('');
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
-  const [signals, setSignals] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -43,15 +42,10 @@ export default function Dashboard() {
     }
 
     fetchData();
-    const storedSignals = localStorage.getItem('signals');
-    if (storedSignals) {
-      setSignals(storedSignals.split(','));
-    }
   }, [setIsLoggedIn]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('eventDetails');
     clearIdb();
     setIsLoggedIn(false);
     Router.push('/auth');
@@ -59,8 +53,18 @@ export default function Dashboard() {
 
   return (
     <>
+      <Head>
+        <title>session-lock - Dashboard</title>
+        <link rel='icon' href='/favicon.ico' />
+        <meta
+          name='description'
+          content='The post-authentication page for session-lock demo.'
+        />
+      </Head>
       <div className='container'>
-        <h1 className='text-2xl font-bold mb-4'>{isLoggedIn ? `You're logged in!` : `Try again!`}</h1>
+        <h1 className='text-2xl font-bold mb-4'>
+          {isLoggedIn ? `You're logged in!` : `Try again!`}
+        </h1>
         <div className='container mx-auto mb-4'>
           <p>{message}</p>
         </div>
@@ -84,12 +88,6 @@ export default function Dashboard() {
             </button>
           </>
         )}
-
-        <div className='container mx-auto max-w-screen-xl mt-20'>
-          <p className='text-m mb-2 border-b border-gray-600'>Risk Signals</p>
-
-          <SignalBoxes signals={signals} />
-        </div>
       </div>
     </>
   );

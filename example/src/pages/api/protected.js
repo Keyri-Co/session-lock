@@ -17,7 +17,7 @@ export default async function protectedRoute(req, res) {
     const jwt = splitLockedToken(token).jwt;
     const decoded = verify(jwt);
     res.status(200).json({
-      message: `Hello, ${decoded.username}! You successfully authenticated using a token that was genuinely issued to your browser. Try copying the JWT from this session into an unauthenticated session on another browser`,
+      message: `Hello, ${decoded.username}! You successfully authenticated using a token that was genuinely issued to your browser. Try copying the JWT from this session into an unauthenticated session on this or another browser. \n The green button below will pull the JWT from this session's LocalStorage and copy it to your clipboard and put it in your clipboard. On the preceding auth page, you can past it into the JWT input, which will put the same JWT back into the same LocalStorage, and try to log in`,
     });
   } catch (error) {
     res.status(401).json({ message: 'Unauthorized' });

@@ -6,7 +6,9 @@ function UpdatedAtText() {
   useEffect(() => {
     async function fetchLastUpdated() {
       try {
-        const response = await fetch('https://api.github.com/repos/Keyri-Co/session-lock-example');
+        const response = await fetch(
+          'https://api.github.com/repos/zainazeem/session-lock'
+        );
         const data = await response.json();
         setLastUpdated(data.pushed_at);
       } catch (error) {
@@ -23,7 +25,15 @@ function UpdatedAtText() {
     return new Intl.DateTimeFormat('en-US', options).format(date);
   };
 
-  return <>{lastUpdated && <p className='text-gray-400 self-center'>Updated {formatDate(lastUpdated)}</p>}</>;
+  return (
+    <>
+      {lastUpdated && (
+        <p className='text-gray-400 self-center'>
+          Updated {formatDate(lastUpdated)}
+        </p>
+      )}
+    </>
+  );
 }
 
 export default UpdatedAtText;

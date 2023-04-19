@@ -16,9 +16,6 @@ dependencies:
   jsonwebtoken:
     specifier: ^9.0.0
     version: 9.0.0
-  keyri-fingerprint:
-    specifier: ^1.0.26
-    version: 1.0.26
   next:
     specifier: 13.2.4
     version: 13.2.4(react-dom@18.2.0)(react@18.2.0)
@@ -35,8 +32,8 @@ dependencies:
     specifier: ^8.0.6
     version: 8.0.6(@types/react@18.0.37)(react@18.2.0)
   session-lock:
-    specifier: ^0.1.0
-    version: 0.1.0
+    specifier: ^0.1.1
+    version: 0.1.1
 
 devDependencies:
   '@tailwindcss/typography':
@@ -1748,10 +1745,6 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
-  /keyri-fingerprint@1.0.26:
-    resolution: {integrity: sha512-viaIe/9Hr1PVxK+QKVismBuup28IsoJldx9O6o6vTYGN99f7LMCT+Pw166bvydbfKTW05ai42ahL4l9eoKv3AQ==}
-    dev: false
-
   /kleur@4.1.5:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
@@ -2681,8 +2674,8 @@ packages:
       lru-cache: 6.0.0
     dev: false
 
-  /session-lock@0.1.0:
-    resolution: {integrity: sha512-HmpsxgQ82eCs3tSmeKXrxL1QYdmiKx24361kuvvzoc6cpYqqNJ/oLPZ6+b1OEZcRLN8IDhwriksTS3HSQrdxQQ==}
+  /session-lock@0.1.1:
+    resolution: {integrity: sha512-UXYptwz/rAlkrxlEV9Jv2ZUaDeNoritaV1gWt3Gdif7gUrt321mbNoItlt4UMLQWdaVpfMZISPgMbSunJBSX6g==}
     dev: false
 
   /shebang-command@2.0.0:

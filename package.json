@@ -1,8 +1,10 @@
 {
   "name": "session-lock",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "A library to lock session tokens to the browser to which they were issued",
   "main": "index.js",
+  "types": "index.d.ts",
+  "type": "module",
   "directories": {
     "example": "example"
   },

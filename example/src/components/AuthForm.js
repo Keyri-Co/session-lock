@@ -2,7 +2,6 @@ import { useState, useContext } from 'react';
 import Router from 'next/router';
 import { UserContext } from '@/pages/_app';
 import { generateKeyPair } from 'session-lock';
-import { Device } from 'keyri-fingerprint';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -20,9 +19,7 @@ const AuthForm = () => {
   async function handleSignup(e) {
     e.preventDefault();
     setLoading(true);
-    let device = new Device({ apiKey: process.env.NEXT_PUBLIC_FINGERPRINT_API_KEY, environment: 'development' });
-    await device.load();
-
+    
     const publicKey = await generateKeyPair();
     const res = await fetch('/api/signup', {
       method: 'POST',
@@ -34,9 +31,6 @@ const AuthForm = () => {
       toggleAuthState();
       const { token } = await res.json();
       localStorage.setItem('token', token);
-      const signupEvent = await device.generateEvent({ eventType: 'signup', eventResult: 'success', userId: username });
-      const riskSignals = signupEvent.signals;
-      localStorage.setItem('eventDetails', riskSignals);
       setLoading(false);
       Router.push('/dashboard');
     } else {
@@ -48,8 +42,6 @@ const AuthForm = () => {
   async function handleLogin(e) {
     e.preventDefault();
     setLoading(true);
-    let device = new Device({ apiKey: process.env.NEXT_PUBLIC_FINGERPRINT_API_KEY, environment: 'development' });
-    await device.load();
 
     const publicKey = await generateKeyPair();
     const res = await fetch('/api/login', {
@@ -63,9 +55,6 @@ const AuthForm = () => {
       setLoginError('');
       const { token } = await res.json();
       localStorage.setItem('token', token);
-      const loginEvent = await device.generateEvent({ eventType: 'login', eventResult: 'success', userId: username });
-      const riskSignals = loginEvent.signals;
-      localStorage.setItem('signals', riskSignals);
       setLoading(false);
       Router.push('/dashboard');
     } else {
