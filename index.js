@@ -3,7 +3,7 @@ import { webcrypto } from 'crypto';
 // JWT helpers
 
 /**
- * Splits a locked token into its components.
+ * Splits a locked token into its components. To be performed on the server.
  * @param {string} lockedToken - The locked token.
  * @returns {object} An object containing the JWT, timestamped JWT, timestamp, signature, and public key.
  */
@@ -153,7 +153,7 @@ async function exportPublicKey(key) {
   return exportB64;
 }
 
-// To be run on the client/browser
+// To be run on the client / browser
 /**
   
   Generates an ECDSA key pair and stores the private key in IndexedDB.
@@ -177,7 +177,7 @@ async function generateKeyPair() {
 
 /**
 
-Locks a JWT with a timestamp and ECDSA signature.
+Locks a JWT with a timestamp and ECDSA signature. To be run on the client / browser.
 @param {string} token - The JWT to lock.
 @returns {Promise<string>} A promise that resolves with the locked token.
 */
@@ -206,7 +206,7 @@ async function lockToken(token) {
 // To be run on the client / browser
 /**
 
-Imports a base64-encoded public key as a CryptoKey object.
+Imports a base64-encoded public key as a CryptoKey object. To be run on the client / browser.
 @param {string} publicKeyB64 - The base64-encoded public key to import.
 @returns {Promise<CryptoKey>} A promise that resolves with the imported public key.
 */
@@ -232,7 +232,7 @@ async function importPublicKey(publicKeyB64) {
 // To be run on the server
 /**
 
-Verifies a locked token's timestamp and signature.
+Verifies a locked token's timestamp and signature. To be run on the server.
 @param {string} lockedToken - The locked token to verify.
 @returns {Promise<string>} A promise that resolves with a validation message: 'valid' | 'Invalid signature' | 'Token expired'
 */

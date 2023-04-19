@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import Router from 'next/router';
 import { UserContext } from '@/pages/_app';
-import { generateKeyPair } from '@/lib/session-lock';
+import { generateKeyPair } from 'session-lock';
 import { Device } from 'keyri-fingerprint';
 
 const AuthForm = () => {

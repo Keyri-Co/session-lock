@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import Router from 'next/router';
 import { UserContext } from '@/pages/_app';
-import { lockToken, clearIdb } from '@/lib/session-lock';
+import { lockToken, clearIdb } from 'session-lock';
 import SignalBoxes from '@/components/SignalBoxes';
 import CopyTokenButton from '@/components/CopyTokenButton';
 

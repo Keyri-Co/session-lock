@@ -1,5 +1,5 @@
 import { verify } from '@/lib/jwt';
-import { verifyLockedToken, splitLockedToken } from '@/lib/session-lock';
+import { verifyLockedToken, splitLockedToken } from 'session-lock';
 
 export default async function protectedRoute(req, res) {
   if (req.method !== 'GET') {

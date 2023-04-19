@@ -34,6 +34,9 @@ dependencies:
   react-markdown:
     specifier: ^8.0.6
     version: 8.0.6(@types/react@18.0.37)(react@18.2.0)
+  session-lock:
+    specifier: ^0.1.0
+    version: 0.1.0
 
 devDependencies:
   '@tailwindcss/typography':
@@ -2676,6 +2679,10 @@ packages:
     hasBin: true
     dependencies:
       lru-cache: 6.0.0
+    dev: false
+
+  /session-lock@0.1.0:
+    resolution: {integrity: sha512-HmpsxgQ82eCs3tSmeKXrxL1QYdmiKx24361kuvvzoc6cpYqqNJ/oLPZ6+b1OEZcRLN8IDhwriksTS3HSQrdxQQ==}
     dev: false
 
   /shebang-command@2.0.0:
