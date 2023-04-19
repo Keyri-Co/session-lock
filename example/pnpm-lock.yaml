@@ -32,8 +32,8 @@ dependencies:
     specifier: ^8.0.6
     version: 8.0.6(@types/react@18.0.37)(react@18.2.0)
   session-lock:
-    specifier: ^0.1.1
-    version: 0.1.1
+    specifier: ^0.1.2
+    version: 0.1.2
 
 devDependencies:
   '@tailwindcss/typography':
@@ -2674,8 +2674,8 @@ packages:
       lru-cache: 6.0.0
     dev: false
 
-  /session-lock@0.1.1:
-    resolution: {integrity: sha512-UXYptwz/rAlkrxlEV9Jv2ZUaDeNoritaV1gWt3Gdif7gUrt321mbNoItlt4UMLQWdaVpfMZISPgMbSunJBSX6g==}
+  /session-lock@0.1.2:
+    resolution: {integrity: sha512-XI1g48D0xHZaRrWA5kr9CWP3V3HI06PHsJwIC0eUuR2EbMV7nRW6N2ehuymBfZ78vWdwJl9XPh1v7/aq8Z9C0A==}
     dev: false
 
   /shebang-command@2.0.0:
