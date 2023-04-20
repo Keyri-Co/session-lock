@@ -38,8 +38,8 @@ dependencies:
     specifier: ^1.2.2
     version: 1.2.2
   session-lock:
-    specifier: ^0.1.2
-    version: 0.1.2
+    specifier: ^0.1.3
+    version: 0.1.3
 
 devDependencies:
   '@tailwindcss/typography':
@@ -2696,8 +2696,8 @@ packages:
       lru-cache: 6.0.0
     dev: false
 
-  /session-lock@0.1.2:
-    resolution: {integrity: sha512-XI1g48D0xHZaRrWA5kr9CWP3V3HI06PHsJwIC0eUuR2EbMV7nRW6N2ehuymBfZ78vWdwJl9XPh1v7/aq8Z9C0A==}
+  /session-lock@0.1.3:
+    resolution: {integrity: sha512-xHS4Lm1xzn0YVK0sn3hFJqcr/YPL/2sBovy7LjbIaE4RvKe2dqzu8jawXK45Y8m/h9wVnWyKUUSxLYzaRsSkMw==}
     dev: false
 
   /shebang-command@2.0.0:
