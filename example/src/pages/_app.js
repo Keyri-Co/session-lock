@@ -1,6 +1,7 @@
 import { useState, createContext } from 'react';
 import '../styles/globals.css';
 import Layout from '../components/Layout';
+import { Analytics } from '@vercel/analytics/react';
 
 export const UserContext = createContext();
 
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }) {
       <Layout>
         <Component {...pageProps} />
       </Layout>
+      <Analytics />
     </UserContext.Provider>
   );
 }

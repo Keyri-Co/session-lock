@@ -33,12 +33,14 @@ Locks a JWT with a timestamp and ECDSA signature. To be run on the client / brow
 declare function lockToken(jwt: string): Promise<string>;
 
 /**
-
 Verifies a locked token's timestamp and signature. To be run on the server.
 @param {string} lockedToken - The locked token to verify.
+@param {number} [validityInterval=2000] - The interval for token validity.
+@param {string} [externalPublicKey] - Optional external public key.
 @returns {Promise<string>} A promise that resolves with a validation message: 'valid' | 'Invalid signature' | 'Token expired'
 */
 declare function verifyLockedToken(
   lockedToken: string,
-  validityInterval?: number
+  validityInterval?: number,
+  externalPublicKey?: string
 ): { validationMessage: string };

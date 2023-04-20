@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.0.0",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "eslint": "8.37.0",
@@ -19,6 +20,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^8.0.6",
+    "rehype-video": "^1.2.2",
     "session-lock": "^0.1.2"
   },
   "devDependencies": {

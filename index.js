@@ -239,17 +239,24 @@ async function importPublicKey(publicKeyB64) {
 
 // To be run on the server
 /**
-
 Verifies a locked token's timestamp and signature. To be run on the server.
 @param {string} lockedToken - The locked token to verify.
+@param {number} [validityInterval=2000] - The interval for token validity.
+@param {string} [externalPublicKey] - Optional external public key.
 @returns {Promise<string>} A promise that resolves with a validation message: 'valid' | 'Invalid signature' | 'Token expired'
 */
-export async function verifyLockedToken(lockedToken, validityInterval = 3000) {
+export async function verifyLockedToken(
+  lockedToken,
+  validityInterval = 2000,
+  externalPublicKey
+) {
   try {
     const tokenElements = splitLockedToken(lockedToken);
     const timestampedJwt = tokenElements.timestampedJwt;
     const signature = base64ToArrayBuffer(tokenElements.signature);
-    const publicKey = await importPublicKey(tokenElements.publicKey);
+    const publicKey = externalPublicKey
+      ? await importPublicKey(externalPublicKey)
+      : await importPublicKey(tokenElements.publicKey);
     const timestamp = tokenElements.timestamp;
     const validInterval = Date.now() - timestamp <= validityInterval;
     const ec = new TextEncoder();

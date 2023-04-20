@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  '@vercel/analytics':
+    specifier: ^1.0.0
+    version: 1.0.0(react@18.2.0)
   bcryptjs:
     specifier: ^2.4.3
     version: 2.4.3
@@ -31,6 +34,9 @@ dependencies:
   react-markdown:
     specifier: ^8.0.6
     version: 8.0.6(@types/react@18.0.37)(react@18.2.0)
+  rehype-video:
+    specifier: ^1.2.2
+    version: 1.2.2
   session-lock:
     specifier: ^0.1.2
     version: 0.1.2
@@ -400,6 +406,14 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.57.1
       eslint-visitor-keys: 3.4.0
+    dev: false
+
+  /@vercel/analytics@1.0.0(react@18.2.0):
+    resolution: {integrity: sha512-RQmj7pv82JwGDHrnKeRc6TtSw2U7rWNubc2IH0ernTzWTj02yr9zvIYiYJeztsBzrJtWv7m8Nz6vxxb+cdEtJw==}
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /acorn-jsx@5.3.2(acorn@8.8.2):
@@ -2577,6 +2591,14 @@ packages:
       call-bind: 1.0.2
       define-properties: 1.2.0
       functions-have-names: 1.2.3
+    dev: false
+
+  /rehype-video@1.2.2:
+    resolution: {integrity: sha512-p18JzIZiFSUqk21RHeJTU/7/7n9Moy0aQzFzbujVWb4vPrRZHQAN0ZfzTV8J32yDsZE5d6JDGWOzmMdvJrHq0w==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dependencies:
+      unified: 10.1.2
+      unist-util-visit: 4.1.2
     dev: false
 
   /remark-parse@10.0.1:
