@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <div className='flex flex-col min-h-screen'>
       <nav className='w-full border-b border-gray-600'>
-        <div className='container mx-auto max-w-screen-xl flex justify-between items-center px-8 py-2'>
+        <div className='container mx-auto max-w-screen-lg flex justify-between items-center px-8 py-2'>
           <Link href='/' className='text-white text-3xl font-semibold'>
             Session Lock
           </Link>
@@ -44,12 +44,12 @@ const Layout = ({ children }) => {
         </div>
       </nav>
 
-      <main className='container mx-auto max-w-screen-xl px-8 py-4 text-white flex-grow'>
+      <main className='container mx-auto max-w-screen-lg px-8 py-4 text-white flex-grow mt-4 mb-8'>
         {children}
       </main>
 
       <footer className='w-full z-20'>
-        <div className='container mx-auto max-w-screen-xl flex justify-between items-center px-8 py-2'>
+        <div className='container mx-auto max-w-screen-lg flex justify-between items-center px-8 py-2'>
           <a
             target='_blank'
             href='https://keyri.com'
