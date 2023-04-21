@@ -8,7 +8,7 @@ const AuthForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [loginError, setLoginError] = useState('');
+  const [authError, setAuthError] = useState('');
   const [jwtInput, setJwtInput] = useState('');
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
 
@@ -19,23 +19,28 @@ const AuthForm = () => {
   async function handleSignup(e) {
     e.preventDefault();
     setLoading(true);
-    
-    const publicKey = await generateKeyPair();
-    const res = await fetch('/api/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, publicKey }),
-    });
 
-    if (res.status === 200) {
-      toggleAuthState();
-      const { token } = await res.json();
-      localStorage.setItem('token', token);
+    try {
+      const publicKey = await generateKeyPair();
+      const res = await fetch('/api/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, publicKey }),
+      });
+
+      if (res.status === 200) {
+        toggleAuthState();
+        const { token } = await res.json();
+        localStorage.setItem('token', token);
+        setLoading(false);
+        Router.push('/dashboard');
+      } else {
+        setLoading(false);
+        setAuthError('Username already exists');
+      }
+    } catch (err) {
       setLoading(false);
-      Router.push('/dashboard');
-    } else {
-      setLoading(false);
-      alert('Failed to sign up');
+      setAuthError(err.message);
     }
   }
 
@@ -43,24 +48,28 @@ const AuthForm = () => {
     e.preventDefault();
     setLoading(true);
 
-    const publicKey = await generateKeyPair();
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password, publicKey }),
-    });
+    try {
+      const publicKey = await generateKeyPair();
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password, publicKey }),
+      });
 
-    if (res.status === 200) {
-      toggleAuthState();
-      setLoginError('');
-      const { token } = await res.json();
-      localStorage.setItem('token', token);
+      if (res.status === 200) {
+        toggleAuthState();
+        setAuthError('');
+        const { token } = await res.json();
+        localStorage.setItem('token', token);
+        setLoading(false);
+        Router.push('/dashboard');
+      } else {
+        setLoading(false);
+        setAuthError('Invalid username or password');
+      }
+    } catch (err) {
       setLoading(false);
-      Router.push('/dashboard');
-    } else {
-      setLoading(false);
-      setLoginError('Invalid username or password');
-      await device.generateEvent({ eventType: 'login', eventResult: 'fail', userId: username });
+      setAuthError(err.message);
     }
   }
 
@@ -77,9 +86,14 @@ const AuthForm = () => {
   return (
     <div className='w-full'>
       <div className='flex flex-col mb-4'>
-        <h1 className='w-full max-w-sm mx-auto text-2xl font-bold'>{isLogin ? 'Log in' : 'Register'}</h1>
+        <h1 className='w-full max-w-sm mx-auto text-2xl font-bold'>
+          {isLogin ? 'Log in' : 'Register'}
+        </h1>
       </div>
-      <form className='w-full max-w-sm mx-auto' onSubmit={isLogin ? handleLogin : handleSignup}>
+      <form
+        className='w-full max-w-sm mx-auto'
+        onSubmit={isLogin ? handleLogin : handleSignup}
+      >
         <div className='flex flex-col mb-4'>
           <input
             className='py-2 px-3 border rounded placeholder-gray-500 focus:outline-none text-gray-800'
@@ -117,9 +131,16 @@ const AuthForm = () => {
         </div>
       </form>
       <div className='flex flex-col mb-4'>
-        {loginError && <p className='text-red-500 w-full max-w-sm mx-auto'>{loginError}</p>}
-        <p className='w-full max-w-sm mx-auto hover:text-[#A0549D] hover:cursor-pointer' onClick={toggleAuthMode}>
-          {isLogin ? "Don't have an account? Register" : 'Already have an account? Log in'}
+        {authError && (
+          <p className='text-red-500 w-full max-w-sm mx-auto'>{authError}</p>
+        )}
+        <p
+          className='w-full max-w-sm mx-auto hover:text-[#A0549D] hover:cursor-pointer'
+          onClick={toggleAuthMode}
+        >
+          {isLogin
+            ? "Don't have an account? Register"
+            : 'Already have an account? Log in'}
         </p>
       </div>
 

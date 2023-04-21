@@ -77,5 +77,6 @@ const tokenElements = splitLockedToken(lockedToken);
 `verifyLockedToken(lockedToken, validityInterval?, externalPublicKey?)`
 
 - Verifies a locked token's timestamp and signature.
-- `validityInterval` is the number of milliseconds that the locked token is valid for. If not provided, the token is valid for 2000 ms. This setting allows you to balance preventing replay attacks and accommodating latency between the client and server. 3000 ms is a good default.
+- `validityInterval` is the number of milliseconds that the locked token is valid for. If not provided, the token is valid for 2000 ms. This setting allows you to balance preventing replay attacks and accommodating latency between the client and server. 2000 ms is a good default.
+- `externalPublicKey` is an optional param to provide if you're not storing the public key in the JWT payload.
 - Returns a promise that resolves with a validation message: 'valid' | 'Invalid signature' | 'Token expired'
