@@ -36,7 +36,7 @@ export default function Dashboard() {
         console.error(error);
         setIsLoggedIn(false);
         setMessage(
-          `Looks like you don't have a private key in your browser's IndexedDB. Try breaking this again or give up and log in legitimately 🙃`
+          `Looks like you don't have the correct private key in your browser's IndexedDB. Try breaking this again or give up and log in legitimately 🙃`
         );
       }
     }
