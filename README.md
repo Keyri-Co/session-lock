@@ -19,6 +19,8 @@ when a protected resource is requested.
 The library currently provides first-class functionality for JWTs but the
 critical functions can also be used with other session token formats.
 
+![](example/public/mermaid-diagram-2023-04-21-153920.svg)
+
 ## Requirements
 
 - The server-side functions provided in this library have only been tested to
